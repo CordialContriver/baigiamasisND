@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     private final MessageService messageService;
@@ -21,9 +23,9 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String registerUserForm (Model model, String message) {
+    public String registerUserForm (Model model/*, String message*/) {
         model.addAttribute("user", new User());
-        model.addAttribute("message", messageService.getMessage(message));
+        /*model.addAttribute("message", messageService.getMessage(message));*/
         return "forms/userForm";
     }
 
@@ -38,6 +40,6 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", "lt.codeacademy.eshop.product.create.message.success");
 */
         /* return "redirect:/products/save";*/
-        return "redirect:/front";
+        return "redirect:/forms/userForm";
     }
 }

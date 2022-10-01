@@ -3,11 +3,11 @@
       th:with="itemExists=${item.id ne null}">>
 <head>
     <meta charset="UTF-8">
-    <title th:text="${itemExists ? '${item.id}' : #{item.createNewItem}}"></title>
+    <title th:text="${itemExists ? '${item.id}' : '#{item.createNewItem}'}"></title>
 </head>
 <body>
 <div>
-        <h3 th:text="${itemExists ? '${item.id}' : #{item.createNewItem}}"></h3>
+        <h3 th:text="${itemExists ? '${item.id}' : '#{item.createNewItem}'}"></h3>
 
     <form method="post" th:object="${item}"> <!-- th:action="@{/public/users/save}">-->
         <div th:replace="fragments :: inputField('inputName', 'name', #{item.name},'text')"></div>

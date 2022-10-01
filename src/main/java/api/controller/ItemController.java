@@ -28,18 +28,18 @@ public class ItemController {
     @GetMapping
     public String openFrontPage(Model model, @PageableDefault(sort = {"quantity"}) Pageable pageable) {
         model.addAttribute("itemsByPage", itemService.getAllItemsPage(pageable));
-        return "items";
+        return "frontpage";
     }
 
     @GetMapping("/addItem")
-    public String openArticleForm(Model model, String message) {
+    public String openItemForm(Model model/*, String message*/) {
         model.addAttribute("item", new Item());
-        model.addAttribute("message", messageService.getMessage(message));
+        /*model.addAttribute("message", messageService.getMessage(message));*/
         return "forms/itemForm";
     }
 
     @PostMapping("/addItem")
-    public String createArticle(Item item/*, BindingResult bindingResult, RedirectAttributes redirectAttributes*/) {
+    public String createItem(Item item/*, BindingResult bindingResult, RedirectAttributes redirectAttributes*/) {
 
      /*   if(bindingResult.hasErrors()) {
             return "form/product";
@@ -50,7 +50,7 @@ public class ItemController {
         redirectAttributes.addFlashAttribute("message", "lt.codeacademy.eshop.product.create.message.success");
 */
         /* return "redirect:/products/save";*/
-        return " redirect:/sandelis/addItem";
+        return " redirect:/addItem";
     }
 
     @GetMapping("/{id}")

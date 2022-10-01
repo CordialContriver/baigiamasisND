@@ -3,23 +3,23 @@
       th:with="itemExists=${item.id ne null}">>
 <head>
     <meta charset="UTF-8">
-    <title th:text="${itemExists ? '${item.id}' : #{item.createNewItem}}"></title>
+    <title th:text="${itemExists ? '${item.id}' : '#{item.createNewItem}'}"></title>
 </head>
 <body>
 <div>
-        <h3 th:text="${itemExists ? '${item.id}' : #{item.createNewItem}}"></h3>
+    <h3 th:text="${itemExists ? '${item.id}' : '#{item.createNewItem}'}"></h3>
 
     <form method="post" th:object="${item}"> <!-- th:action="@{/public/users/save}">-->
         <div th:replace="fragments :: inputField('inputName', 'name', #{item.name},'text')"></div>
-        <div th:replace="fragments :: inputField('inputQuantity', 'quantity', #{item.quantity},'int')"></div>
+        <div th:replace="fragments :: inputField('inputQuantity', 'quantity', #{item.quantity},'integer')"></div>
         <div th:replace="fragments :: inputField('inputDescription', 'description', #{item.description},'text')"></div>
         <div th:replace="fragments :: inputField('inputCategory', 'category', #{item.category},'text')"></div>
         <div th:replace="fragments :: inputField('inputprivateComments', 'privateComments', #{item.privateComments},'text')"></div>
         <div th:replace="fragments :: inputField('inputCondition', 'condition', #{item.condition},'text')"></div>
 
-        <input type="checkbox" th:id='inputIsDisplayed' th:label='#{item.isDisplayed}'>
+        <div><input type="checkbox" th:id='inputIsDisplayed' th:text='#{item.isDisplayed}'></div>
 
-<!--   File somehow    -->
+        <!--   File somehow    -->
 
         <button type="submit" th:text='#{item.submitNew}'></button>
     </form>
