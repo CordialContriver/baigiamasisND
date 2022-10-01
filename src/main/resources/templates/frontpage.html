@@ -5,14 +5,11 @@
   <title th:text="#{items.title}"></title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/fragments.css">
 </head>
 <body>
-<select id="language-switcher" class="form-select">
-  <option selected></option>
-  <option value="LT" th:text="#{language.lt}"></option>
-  <option value="EN" th:text="#{language.en}"></option>
-</select>
+<div th:replace="fragments::header"></div>
 
 <div th:unless="${not itemsByPage.hasContent()}">
 
@@ -42,9 +39,8 @@
       <td th:text="${item.category}"></td>
       <td>
           <div class="float-end">
-              <a th:href="@{/cart/add/{id}(id=${item.id})}"
-                 class="text-decoration-none me-3">
-                  <i class="bi bi-cart3"></i>
+              <a th:href="@{/cart/add/{id}(id=${item.id})}">
+                <image src="src/main/resources/images/backpack.png" class="ui-icon-cart"></image>
               </a>
              <!-- <a sec:authorize="hasRole('ADMIN')"
                  th:href="@{/products/{id}/delete(id=${product.id})}" class="text-danger">

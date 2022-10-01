@@ -1,0 +1,13 @@
+.ui-icon-cart{
+    height: 50px;
+    width: 50px;
+}
+
+.header{
+    height: 5vh;
+    align-content: space-evenly;
+}
+
+#language-switcher{
+    width: 200px;
+}

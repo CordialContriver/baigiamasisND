@@ -47,7 +47,7 @@ public class CartController {
         Item item = itemService.getItemById(id);
         cart.add(item);
 
-        return "redirect:/frontpage";
+        return "redirect:/sandelis";
     }
 
 
