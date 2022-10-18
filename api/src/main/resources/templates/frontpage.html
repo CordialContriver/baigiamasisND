@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="#{items.title}"></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/fragments.css">
+</head>
+<body>
+<div th:replace="fragments::header"></div>
+
+<div th:unless="${not itemsByPage.hasContent()}">
+
+  <table>
+    <thead>
+    <tr>
+      <th th:text="#{item.name}"></th>
+<!--      <th th:text="#{item.picture}"></th>-->
+      <th th:text="#{item.description}"></th>
+      <th th:text="#{item.quantity}"></th>
+      <th th:text="#{item.category}"></th>
+      <th></th> <!--Į krepšelį-->
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="item : ${itemsByPage.content}">
+
+      <td>
+        <a th:href="@{/sandelis/{id}(id=${item.id})}" th:text="${item.name}"></a>
+      </td>
+<!--
+      <td th:classappend="${item.picture}"></td>
+-->
+      <td th:text="${item.description}"></td>
+      <td th:text="${item.category}"></td>
+      <td>
+
+<!--
+        <input th:id="quantityToCart" th:value="1">
+          <div class="float-end">
+              <a th:href="@{/cart/add/{id}/{quantity}(id=${item.id})(quantity=*{quantityToCart.value})}">
+                <image src="images/backpack.png"></image>
+              </a>-->
+          </div>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+  <ul class="pagination justify-content-center">
+    <li class="page-item"
+        th:classappend="${itemsByPage.number eq 0 ? 'disabled' : ''}">
+      <a class="page-link"
+         th:href="@{/sandelis(page=${itemsByPage.number} - 1)}" th:text="#{paginator.previous}"></a>
+    </li>
+    <li class="page-item"
+        th:each="itemPage: ${#numbers.sequence(0, itemsByPage.totalPages - 1)}"
+        th:classappend="${itemPage eq itemsByPage.number ? 'active': ''}">
+
+      <a class="page-link"
+         th:href="@{/sandelis(page=${itemPage})}"
+         th:text="${itemPage}+1"></a>
+    </li>
+    <li class="page-item"
+        th:classappend="${itemsByPage.number eq itemsByPage.totalPages -1 ? 'disabled' : ''}">
+      <a class="page-link"
+         th:href="@{/sandelis(page=${itemsByPage.number} + 1)}" th:text="#{paginator.next}"></a>
+    </li>
+
+  </ul>
+</div>
+<div th:if="${not itemsByPage.hasContent()}" th:text="#{items.nothing}"></div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/static.js/language-switcher.js}"></script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:with="itemExists=${item.id ne null}" xmlns="http://www.w3.org/1999/html">>
+<head>
+    <meta charset="UTF-8">
+<!--    <title th:text="${itemExists ? '${item.id}' : '#{item.createNewItem}'}"></title>-->
+    <title th:if="${itemExists}" && th:text="#{item.createNewItem}"></title>
+    <title th:not="${itemExists}" && th:text="${item.id}"></title>
+</head>
+<body>
+<div>
+    <form method="post" th:object="${item}">
+        <div th:replace="fragments :: inputField('inputName', 'name', #{item.name},'text')"></div>
+        <div th:replace="fragments :: inputField('inputQuantity', 'quantity', #{item.quantity},'integer')"></div>
+        <div th:replace="fragments :: inputField('inputDescription', 'description', #{item.description},'text')"></div>
+
+        <input id="inputCategory" class="input-list" list="categories" name="category">
+            <datalist id="categories" th:each="value : ${categoryList}">
+                <option th:value="${value}">
+            </datalist>
+        </input>
+
+        <div th:replace="fragments :: inputField('inputCategory', 'category', #{item.category},'text')"></div>
+        <div th:replace="fragments :: inputField('inputprivateComments', 'privateComments', #{item.privateComments},'text')"></div>
+        <div th:replace="fragments :: inputField('inputCondition', 'condition', #{item.condition},'text')"></div>
+
+        <div><input type="checkbox" th:id='inputIsDisplayed' th:text='#{item.isDisplayed}'>
+            <label th:text="#{item.isDisplayed}"></label></div>
+
+        <!--   File somehow    -->
+
+        <button type="submit" th:text='#{item.submitNew}'></button>
+    </form>
+
+</div>
+
+</body>
+</html>

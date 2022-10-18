@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{cart.title}">Title</title>
+</head>
+<body>
+<div th:unless="${cart.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{item.name}"></th>
+            <!--      <th th:text="#{item.picture}"></th>-->
+            <th th:text="#{item.description}"></th>
+            <th th:text="#{item.quantity}"></th>
+            <th th:text="#{item.category}"></th>
+            <th></th> <!--remove from cart-->
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="item : ${cart.keySet()}">
+
+            <td>
+                <a th:href="@{/items/{id}(id=${item.id})}" th:text="${item.name}"></a>
+            </td>
+            <!--
+                  <td th:classappend="${item.picture}"></td>
+            -->
+            <td th:text="${item.description}"></td>
+            <td th:text="${cart.get(item)}"></td>
+            <td th:text="${item.category}"></td>
+            <td>update quantity + delete buttons</td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${cart.isEmpty()}" th:text="#{cart.is.empty}"></div>
+</body>
+</html>
